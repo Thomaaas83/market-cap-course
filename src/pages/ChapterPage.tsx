@@ -1,14 +1,20 @@
 import { useParams, Link } from 'react-router-dom'
 import { Clock, ArrowRight, BookOpen, Construction } from 'lucide-react'
 import { chapters } from '../data/chapters'
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslatedChapter } from '../utils/translation'
 
 export default function ChapterPage() {
   const { chapterId } = useParams()
+  const { language, t } = useLanguage()
+  
   const chapter = chapters.find(c => c.id === chapterId)
 
   if (!chapter) {
-    return <div className="max-w-7xl mx-auto px-4 py-12">Chapitre non trouvé</div>
+    return <div className="max-w-7xl mx-auto px-4 py-12">{t('Chapitre non trouvé', 'Chapter not found')}</div>
   }
+
+  const translatedChapter = getTranslatedChapter(chapter, language)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
@@ -25,33 +31,33 @@ export default function ChapterPage() {
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3">
                 <span className="bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full">
-                  {chapter.lessons.length} leçon{chapter.lessons.length > 1 ? 's' : ''}
+                  {translatedChapter.lessons.length} {t('leçon', 'lesson')}{translatedChapter.lessons.length > 1 ? 's' : ''}
                 </span>
               </div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                {chapter.title}
+                {translatedChapter.title}
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                {chapter.description}
+                {translatedChapter.description}
               </p>
             </div>
           </div>
         </div>
 
-        {chapter.lessons.length > 0 ? (
+        {translatedChapter.lessons.length > 0 ? (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                 <BookOpen className="h-6 w-6 text-blue-600" />
-                Parcours de leçons
+                {t('Parcours de leçons', 'Lesson Path')}
               </h2>
               <span className="text-sm text-gray-500">
-                Progression : 0/{chapter.lessons.length}
+                {t('Progression', 'Progress')} : 0/{translatedChapter.lessons.length}
               </span>
             </div>
 
             <div className="space-y-4">
-              {chapter.lessons.map((lesson, index) => (
+              {translatedChapter.lessons.map((lesson, index) => (
                 <Link
                   key={lesson.id}
                   to={`/chapitre/${chapterId}/lecon/${lesson.id}`}
@@ -67,7 +73,7 @@ export default function ChapterPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                          Leçon {index + 1}
+                          {t('Leçon', 'Lesson')} {index + 1}
                         </span>
                         <div className="flex items-center text-sm text-gray-500">
                           <Clock className="h-4 w-4 mr-1.5" />
@@ -97,10 +103,13 @@ export default function ChapterPage() {
               <Construction className="h-16 w-16 text-yellow-600" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Chapitre en préparation
+              {t('Chapitre en préparation', 'Chapter in Preparation')}
             </h3>
             <p className="text-gray-600">
-              Les leçons de ce chapitre seront bientôt disponibles. Revenez plus tard !
+              {t(
+                'Les leçons de ce chapitre seront bientôt disponibles. Revenez plus tard !',
+                'Lessons for this chapter will be available soon. Come back later!'
+              )}
             </p>
           </div>
         )}
@@ -112,7 +121,7 @@ export default function ChapterPage() {
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group"
           >
             <ArrowRight className="h-4 w-4 mr-2 rotate-180 group-hover:-translate-x-1 transition-transform" />
-            Retour aux chapitres
+            {t('Retour aux chapitres', 'Back to Chapters')}
           </Link>
         </div>
       </div>

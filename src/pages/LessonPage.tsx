@@ -3,20 +3,33 @@ import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, CheckCircle, XCircle, Lightbulb, AlertTriangle, BookmarkCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react'
 import { chapters } from '../data/chapters'
 import { QuizContent } from '../types'
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslatedChapter, getTranslatedLesson } from '../utils/translation'
+import { replaceEmojisWithIcons } from '../utils/emojiToIcon'
 
 export default function LessonPage() {
   const { chapterId, lessonId } = useParams()
+  const { language, t } = useLanguage()
+  
   const chapter = chapters.find(c => c.id === chapterId)
   const lesson = chapter?.lessons.find(l => l.id === lessonId)
 
   if (!chapter || !lesson) {
-    return <div className="max-w-7xl mx-auto px-4 py-12">Leçon non trouvée</div>
+    return <div className="max-w-7xl mx-auto px-4 py-12">{t('Leçon non trouvée', 'Lesson not found')}</div>
   }
+
+  // Traduire le chapitre et la leçon
+  const translatedChapter = getTranslatedChapter(chapter, language)
+  const translatedLesson = getTranslatedLesson(lesson, language)
 
   // Navigation entre leçons
   const currentLessonIndex = chapter.lessons.findIndex(l => l.id === lessonId)
   const previousLesson = currentLessonIndex > 0 ? chapter.lessons[currentLessonIndex - 1] : null
   const nextLesson = currentLessonIndex < chapter.lessons.length - 1 ? chapter.lessons[currentLessonIndex + 1] : null
+  
+  // Traduire les leçons de navigation
+  const translatedPreviousLesson = previousLesson ? getTranslatedLesson(previousLesson, language) : null
+  const translatedNextLesson = nextLesson ? getTranslatedLesson(nextLesson, language) : null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
@@ -28,10 +41,10 @@ export default function LessonPage() {
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            {chapter.title}
+            {translatedChapter.title}
           </Link>
           <span className="text-gray-400">/</span>
-          <span className="text-gray-600 text-sm">Leçon {currentLessonIndex + 1}</span>
+          <span className="text-gray-600 text-sm">{t('Leçon', 'Lesson')} {currentLessonIndex + 1}</span>
         </div>
 
         {/* Header de la leçon */}
@@ -46,10 +59,10 @@ export default function LessonPage() {
               </div>
               <div>
                 <div className="text-sm font-medium text-blue-600 mb-1">
-                  Leçon {currentLessonIndex + 1} sur {chapter.lessons.length}
+                  {t('Leçon', 'Lesson')} {currentLessonIndex + 1} {t('sur', 'of')} {chapter.lessons.length}
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  {lesson.title}
+                  {translatedLesson.title}
                 </h1>
               </div>
             </div>
@@ -60,13 +73,13 @@ export default function LessonPage() {
           </div>
           
           <p className="text-lg text-gray-600 leading-relaxed">
-            {lesson.description}
+            {translatedLesson.description}
           </p>
         </div>
 
         {/* Contenu de la leçon */}
         <div className="space-y-6">
-          {lesson.content.map((block, index) => (
+          {translatedLesson.content.map((block, index) => (
             <ContentBlock key={index} block={block} />
           ))}
         </div>
@@ -74,29 +87,29 @@ export default function LessonPage() {
         {/* Navigation entre leçons */}
         <div className="mt-12 pt-8 border-t-2 border-gray-200">
           <div className="flex items-center justify-between gap-4">
-            {previousLesson ? (
+            {translatedPreviousLesson ? (
               <Link
-                to={`/chapitre/${chapterId}/lecon/${previousLesson.id}`}
+                to={`/chapitre/${chapterId}/lecon/${previousLesson!.id}`}
                 className="group flex items-center gap-3 bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-300 rounded-xl p-4 transition-all flex-1"
               >
                 <ChevronLeft className="h-5 w-5 text-blue-600 group-hover:-translate-x-1 transition-transform" />
                 <div className="text-left">
-                  <div className="text-xs text-gray-500 mb-1">Leçon précédente</div>
-                  <div className="font-semibold text-gray-900 text-sm">{previousLesson.title}</div>
+                  <div className="text-xs text-gray-500 mb-1">{t('Leçon précédente', 'Previous Lesson')}</div>
+                  <div className="font-semibold text-gray-900 text-sm">{translatedPreviousLesson.title}</div>
                 </div>
               </Link>
             ) : (
               <div className="flex-1" />
             )}
 
-            {nextLesson ? (
+            {translatedNextLesson ? (
               <Link
-                to={`/chapitre/${chapterId}/lecon/${nextLesson.id}`}
+                to={`/chapitre/${chapterId}/lecon/${nextLesson!.id}`}
                 className="group flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl p-4 transition-all flex-1 justify-end"
               >
                 <div className="text-right">
-                  <div className="text-xs text-blue-100 mb-1">Leçon suivante</div>
-                  <div className="font-semibold text-sm">{nextLesson.title}</div>
+                  <div className="text-xs text-blue-100 mb-1">{t('Leçon suivante', 'Next Lesson')}</div>
+                  <div className="font-semibold text-sm">{translatedNextLesson.title}</div>
                 </div>
                 <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -106,7 +119,7 @@ export default function LessonPage() {
                 className="group flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white rounded-xl p-4 transition-all"
               >
                 <BookmarkCheck className="h-5 w-5" />
-                <span className="font-semibold">Chapitre terminé !</span>
+                <span className="font-semibold">{t('Chapitre terminé !', 'Chapter completed!')}</span>
               </Link>
             )}
           </div>
@@ -137,8 +150,7 @@ function ContentBlock({ block }: { block: any }) {
           <ul className="space-y-3">
             {block.points.map((point: string, i: number) => (
               <li key={i} className="flex items-start bg-white rounded-lg p-3 shadow-sm">
-                <CheckCircle className="h-5 w-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700 leading-relaxed">{point}</span>
+                {replaceEmojisWithIcons(point, 'h-5 w-5 text-blue-600 mr-3 mt-0.5')}
               </li>
             ))}
           </ul>
@@ -174,11 +186,13 @@ function ContentBlock({ block }: { block: any }) {
           <h3 className="text-xl font-bold text-gray-900 mb-6">{block.title}</h3>
           <div className="space-y-3">
             {block.items.map((item: string, i: number) => (
-              <div key={i} className="flex items-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-100">
+              <div key={i} className="flex items-start bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-100">
                 <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white font-bold w-10 h-10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 shadow-sm">
                   {i + 1}
                 </div>
-                <span className="text-gray-700 leading-relaxed">{item}</span>
+                <div className="text-gray-700 leading-relaxed flex-1">
+                  {replaceEmojisWithIcons(item, 'h-5 w-5 inline-block mr-2 text-purple-600')}
+                </div>
               </div>
             ))}
           </div>
@@ -191,6 +205,7 @@ function ContentBlock({ block }: { block: any }) {
 }
 
 function QuizBlock({ quiz }: { quiz: QuizContent }) {
+  const { t } = useLanguage()
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showExplanation, setShowExplanation] = useState(false)
 
@@ -208,7 +223,7 @@ function QuizBlock({ quiz }: { quiz: QuizContent }) {
           <AlertTriangle className="h-5 w-5" />
         </div>
         <h3 className="text-xl font-bold text-gray-900">
-          Quiz de compréhension
+          {t('Quiz de compréhension', 'Comprehension Quiz')}
         </h3>
       </div>
       
@@ -267,12 +282,12 @@ function QuizBlock({ quiz }: { quiz: QuizContent }) {
             {isCorrect ? (
               <>
                 <CheckCircle className="h-5 w-5 text-green-600" />
-                <span className="text-green-900">Excellent !</span>
+                <span className="text-green-900">{t('Excellent !', 'Excellent!')}</span>
               </>
             ) : (
               <>
                 <AlertTriangle className="h-5 w-5 text-orange-600" />
-                <span className="text-orange-900">Pas tout à fait...</span>
+                <span className="text-orange-900">{t('Pas tout à fait...', 'Not quite...')}</span>
               </>
             )}
           </p>

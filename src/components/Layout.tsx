@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GraduationCap, Home } from 'lucide-react'
+import { GraduationCap, Home, Languages } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface LayoutProps {
   children: ReactNode
@@ -9,6 +10,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const { language, setLanguage, t } = useLanguage()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -23,9 +25,9 @@ export default function Layout({ children }: LayoutProps) {
               </div>
               <div>
                 <h1 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                  Finance de Marché
+                  {t('Finance de Marché', 'Market Finance')}
                 </h1>
-                <p className="text-xs text-gray-500">Cours interactif</p>
+                <p className="text-xs text-gray-500">{t('Cours interactif', 'Interactive Course')}</p>
               </div>
             </Link>
 
@@ -40,8 +42,34 @@ export default function Layout({ children }: LayoutProps) {
                 }`}
               >
                 <Home className="h-4 w-4" />
-                <span className="hidden sm:inline">Accueil</span>
+                <span className="hidden sm:inline">{t('Accueil', 'Home')}</span>
               </Link>
+              
+              {/* Sélecteur de langue */}
+              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setLanguage('fr')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-sm transition-all ${
+                    language === 'fr'
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <Languages className="h-3.5 w-3.5" />
+                  FR
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-sm transition-all ${
+                    language === 'en'
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <Languages className="h-3.5 w-3.5" />
+                  EN
+                </button>
+              </div>
             </nav>
           </div>
         </div>
@@ -59,11 +87,17 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex items-center gap-2 text-gray-600">
               <GraduationCap className="h-5 w-5 text-blue-600" />
               <span className="text-sm">
-                Cours de Finance de Marché - Plateforme interactive de révision
+                {t(
+                  'Cours de Finance de Marché - Plateforme interactive de révision',
+                  'Market Finance Course - Interactive Learning Platform'
+                )}
               </span>
             </div>
             <div className="text-sm text-gray-500">
-              Conçu pour comprendre, pas juste mémoriser
+              {t(
+                'Conçu pour comprendre, pas juste mémoriser',
+                'Designed to understand, not just memorize'
+              )}
             </div>
           </div>
         </div>
