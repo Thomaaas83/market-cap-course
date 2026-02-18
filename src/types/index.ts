@@ -27,6 +27,8 @@ export type LessonContent =
   | DiagramContent
   | QuizContent
   | KeyPointsContent
+  | AnimationContent
+  | ComparisonContent
 
 export interface TextContent {
   type: 'text'
@@ -69,4 +71,28 @@ export interface KeyPointsContent {
   titleEn?: string
   points: string[]
   pointsEn?: string[]
+}
+
+export interface AnimationContent {
+  type: 'animation'
+  animationType: 'ecosystem' | 'decision-flow' | 'value-chain' | 'capital-cycle' | 'option-payoff' | 'bond-cashflow' | 'bond-price-yield' | 'market-flow' | 'instrument-comparison' | 'interest-rate-impact' | 'index-composition'
+  title: string
+  titleEn?: string
+  description: string
+  descriptionEn?: string
+  config?: any
+}
+
+export interface ComparisonContent {
+  type: 'comparison'
+  title: string
+  titleEn?: string
+  items: ComparisonItem[]
+}
+
+export interface ComparisonItem {
+  category: string
+  categoryEn?: string
+  features: string[]
+  featuresEn?: string[]
 }

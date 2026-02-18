@@ -1,0 +1,40 @@
+================================================================================
+CHAPITRE 3 - CONSIGNES D'ANIMATIONS
+================================================================================
+
+Instructions:
+-------------
+Pour chaque passage du cours que tu veux animer, indique:
+1. Le numéro de la section ou un extrait du texte concerné
+2. Le type d'animation souhaité
+3. Les détails spécifiques de l'animation
+
+
+FORMAT SUGGÉRÉ:
+---------------
+
+ANIMATION 1:
+Section: [Titre de la section ou extrait du texte]
+Type: [exemple, graphique, comparaison, timeline, etc.]
+Description: [Décris ce que tu veux voir animé]
+Prompt utilisé: [Colle ton prompt ici]
+
+---
+
+ANIMATION 2:
+Section: [Titre de la section ou extrait du texte]
+Type: [exemple, graphique, comparaison, timeline, etc.]
+Description: [Décris ce que tu veux voir animé]
+Prompt utilisé: [Colle ton prompt ici]
+
+---
+
+[Continue pour toutes tes animations...]
+
+
+CONSIGNES D'ANIMATIONS:
+-----------------------
+[Colle tes consignes ici]
+
+
+================================================================================

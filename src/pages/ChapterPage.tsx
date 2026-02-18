@@ -17,10 +17,15 @@ export default function ChapterPage() {
   const translatedChapter = getTranslatedChapter(chapter, language)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header du chapitre */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/50 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 -left-40 w-[700px] h-[700px] bg-gradient-to-br from-purple-400/15 to-purple-600/15 rounded-full blur-3xl"></div>
+      </div>
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header du chapitre - Optimisé : pas de backdrop-blur */}
+        <div className="bg-white/95 rounded-[2rem] shadow-lg border border-gray-200 p-8 mb-10">
           <div className="flex items-start gap-6">
             <div className={`${chapter.color} w-20 h-20 rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0`}>
               {(() => {
@@ -61,7 +66,7 @@ export default function ChapterPage() {
                 <Link
                   key={lesson.id}
                   to={`/chapitre/${chapterId}/lecon/${lesson.id}`}
-                  className="group block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100 hover:border-blue-200 hover:-translate-y-0.5"
+                  className="group block bg-white/95 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 hover:border-blue-300 hover:-translate-y-1"
                 >
                   <div className="flex items-start gap-4">
                     {/* Numéro de leçon */}

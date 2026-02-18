@@ -1,0 +1,813 @@
+import { Lesson } from '../../types'
+
+export const economicAgentsLessons: Lesson[] = [
+ {
+ id: 'introduction-agents',
+ title: 'Introduction : pourquoi les agents économiques sont importants',
+ titleEn: 'Introduction: why economic agents matter',
+ description: 'Comprendre le rôle central des agents dans le fonctionnement des marchés financiers',
+ descriptionEn: 'Understanding the central role of agents in financial market functioning',
+ duration: '8 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les marchés financiers ne sont pas des mécanismes abstraits. Ils sont animés par des agents économiques qui prennent des décisions, prennent des risques, fournissent des financements ou cherchent à se financer. Comprendre qui sont ces agents et ce qu\'ils font est essentiel car cela explique :',
+ contentEn: 'Financial markets are not abstract mechanisms. They are driven by economic agents who make decisions, take risks, provide funding, or seek financing. Understanding who these agents are and what they do is essential because it explains:'
+ },
+ {
+ type: 'keypoints',
+ title: 'Pourquoi étudier les agents économiques ?',
+ titleEn: 'Why study economic agents?',
+ points: [
+ 'Pourquoi les instruments financiers existent (actions, obligations, dérivés)',
+ 'Pourquoi les prix bougent (car les agents achètent, vendent, se couvrent ou spéculent)',
+ 'Comment l\'économie se finance (entreprises et États lèvent des fonds)',
+ 'Comment les risques sont redistribués (transfert et diversification du risque)'
+ ],
+ pointsEn: [
+ 'Why financial instruments exist (stocks, bonds, derivatives)',
+ 'Why prices move (because agents buy, sell, hedge, or speculate)',
+ 'How the economy gets financed (companies and governments raise funds)',
+ 'How risks are redistributed (risk transfer and diversification)'
+ ]
+ },
+ {
+ type: 'text',
+ content: 'En d\'autres termes, les marchés sont un écosystème : chaque agent a un rôle, et les résultats du marché (prix, rendements, volatilité) émergent de leurs interactions.',
+ contentEn: 'In other words, markets are an ecosystem: each agent has a role, and market outcomes (prices, yields, volatility) emerge from their interactions.'
+ },
+ {
+ type: 'animation',
+ animationType: 'ecosystem',
+ title: 'L\'écosystème des agents économiques',
+ titleEn: 'The economic agents ecosystem',
+ description: 'Visualisation interactive de la circulation des capitaux entre les différents agents',
+ descriptionEn: 'Interactive visualization of capital flow between different agents',
+ config: {
+ agents: [
+ { id: 'investors', label: 'Investisseurs\n(Fournisseurs de capitaux)', labelEn: 'Investors\n(Capital Suppliers)', type: 'supplier', delay: 0 },
+ { id: 'assetManagers', label: 'Gestionnaires d\'actifs', labelEn: 'Asset Managers', type: 'intermediary', delay: 500 },
+ { id: 'markets', label: 'Marchés Financiers', labelEn: 'Financial Markets', type: 'platform', delay: 1000 },
+ { id: 'banks', label: 'Banques', labelEn: 'Banks', type: 'intermediary', delay: 1500 },
+ { id: 'corporates', label: 'Entreprises\n(Demandeurs de capitaux)', labelEn: 'Corporates\n(Capital Demanders)', type: 'demander', delay: 2000 },
+ { id: 'governments', label: 'États', labelEn: 'Governments', type: 'demander', delay: 2500 },
+ { id: 'centralBank', label: 'Banque Centrale', labelEn: 'Central Bank', type: 'regulator', delay: 3000 },
+ { id: 'regulators', label: 'Régulateurs', labelEn: 'Regulators', type: 'regulator', delay: 3500 }
+ ],
+ flows: [
+ { from: 'investors', to: 'assetManagers', label: 'Épargne', labelEn: 'Savings', type: 'money' },
+ { from: 'assetManagers', to: 'markets', label: 'Investissements', labelEn: 'Investments', type: 'money' },
+ { from: 'banks', to: 'markets', label: 'Liquidité', labelEn: 'Liquidity', type: 'money' },
+ { from: 'markets', to: 'corporates', label: 'Financement', labelEn: 'Financing', type: 'money' },
+ { from: 'markets', to: 'governments', label: 'Financement', labelEn: 'Financing', type: 'money' },
+ { from: 'corporates', to: 'markets', label: 'Titres (actions, obligations)', labelEn: 'Securities (stocks, bonds)', type: 'securities' },
+ { from: 'governments', to: 'markets', label: 'Obligations d\'État', labelEn: 'Government bonds', type: 'securities' },
+ { from: 'centralBank', to: 'markets', label: 'Politique monétaire', labelEn: 'Monetary policy', type: 'supervision' },
+ { from: 'regulators', to: 'markets', label: 'Supervision', labelEn: 'Supervision', type: 'supervision' }
+ ]
+ }
+ },
+ {
+ type: 'quiz',
+ question: 'Qu\'est-ce qui explique les mouvements de prix sur les marchés financiers ?',
+ questionEn: 'What explains price movements in financial markets?',
+ options: [
+ 'Les décisions automatiques des ordinateurs',
+ 'Les interactions entre agents qui achètent, vendent et se couvrent',
+ 'Les décisions du gouvernement uniquement',
+ 'Le hasard'
+ ],
+ optionsEn: [
+ 'Automatic computer decisions',
+ 'Interactions between agents who buy, sell and hedge',
+ 'Government decisions only',
+ 'Chance'
+ ],
+ correctAnswer: 1,
+ explanation: 'Les prix bougent car les agents économiques prennent des décisions d\'achat, de vente, de couverture ou de spéculation. Ces interactions créent l\'offre et la demande qui déterminent les prix.',
+ explanationEn: 'Prices move because economic agents make buying, selling, hedging or speculation decisions. These interactions create supply and demand that determine prices.'
+ }
+ ]
+ },
+ {
+ id: 'demandeurs-offreurs',
+ title: 'Les deux rôles fondamentaux : demandeurs vs offreurs de capitaux',
+ titleEn: 'The two core roles: capital demanders vs capital suppliers',
+ description: 'Distinction entre agents en déficit et agents en surplus',
+ descriptionEn: 'Distinction between deficit and surplus agents',
+ duration: '10 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Une façon clé de comprendre les marchés financiers est de classer les agents selon leur rôle fonctionnel.',
+ contentEn: 'A key way to understand financial markets is to classify agents by their functional role.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Demandeurs de capitaux (agents en déficit)',
+ titleEn: 'Capital demanders (deficit agents)',
+ points: [
+ 'Ont besoin d\'argent pour financer des projets, la croissance, l\'investissement ou les dépenses publiques',
+ 'Lèvent des capitaux en émettant des instruments financiers (actions ou obligations)',
+ 'Exemples : entreprises, États, banques (quand elles se refinancent)'
+ ],
+ pointsEn: [
+ 'Need money to finance projects, growth, investment, or public spending',
+ 'Raise capital by issuing financial instruments (equity or debt)',
+ 'Examples: corporates, governments, banks (when they refinance themselves)'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Offreurs de capitaux (agents en surplus)',
+ titleEn: 'Capital suppliers (surplus agents)',
+ points: [
+ 'Fournissent de l\'argent en échange d\'un rendement attendu',
+ 'Apportent des capitaux en achetant des instruments financiers émis par les demandeurs',
+ 'Exemples : ménages, investisseurs institutionnels (fonds de pension, assurances, fonds d\'investissement, fonds souverains, gestionnaires d\'actifs)'
+ ],
+ pointsEn: [
+ 'Provide money in exchange for an expected return',
+ 'Supply capital by buying financial instruments issued by demanders',
+ 'Examples: households, institutional investors (pension funds, insurance companies, mutual funds, sovereign wealth funds, asset managers)'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Intermédiaires et régulateurs (rôles de soutien)',
+ titleEn: 'Intermediaries and regulators (support roles)',
+ points: [
+ 'Intermédiaires financiers : facilitent les transactions et l\'accès au marché (banques, courtiers, banques d\'investissement)',
+ 'Régulateurs et banques centrales : assurent la stabilité, les règles et les conditions monétaires'
+ ],
+ pointsEn: [
+ 'Financial intermediaries: facilitate transactions and market access (banks, brokers, investment banks)',
+ 'Regulators and central banks: provide stability, rules, and monetary conditions'
+ ]
+ },
+ {
+ type: 'example',
+ title: 'Exemple concret : Financement d\'une nouvelle usine',
+ titleEn: 'Concrete example: Financing a new factory',
+ content: 'Renault (demandeur) veut construire une usine de batteries pour 500M€. Elle émet des obligations sur le marché. Des fonds de pension et assurances (offreurs) achètent ces obligations. Une banque d\'investissement (intermédiaire) structure l\'opération. L\'AMF (régulateur) supervise la transaction.',
+ contentEn: 'Renault (demander) wants to build a battery factory for €500M. It issues bonds on the market. Pension funds and insurance companies (suppliers) buy these bonds. An investment bank (intermediary) structures the operation. The AMF (regulator) supervises the transaction.',
+ highlight: 'Demandeurs cherchent du financement, offreurs fournissent du financement, intermédiaires les connectent, et régulateurs stabilisent le système.',
+ highlightEn: 'Demanders need funding, suppliers provide funding, intermediaries connect them, and regulators stabilize the system.'
+ },
+ {
+ type: 'quiz',
+ question: 'Qu\'est-ce qu\'un agent en déficit ?',
+ questionEn: 'What is a deficit agent?',
+ options: [
+ 'Un agent qui a de l\'épargne à placer',
+ 'Un agent qui a besoin de financement',
+ 'Un agent qui gère les transactions',
+ 'Un agent qui supervise le marché'
+ ],
+ optionsEn: [
+ 'An agent who has savings to invest',
+ 'An agent who needs financing',
+ 'An agent who manages transactions',
+ 'An agent who supervises the market'
+ ],
+ correctAnswer: 1,
+ explanation: 'Un agent en déficit a des besoins de financement supérieurs à ses ressources. Il doit donc lever des fonds sur les marchés en émettant des titres financiers.',
+ explanationEn: 'A deficit agent has financing needs greater than its resources. It must therefore raise funds on markets by issuing financial securities.'
+ }
+ ]
+ },
+ {
+ id: 'corporates-gouvernance',
+ title: 'Les entreprises : gouvernance et décisions financières',
+ titleEn: 'Corporates: governance and financial decisions',
+ description: 'Comment les entreprises prennent leurs décisions de financement',
+ descriptionEn: 'How companies make their financing decisions',
+ duration: '12 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les entreprises sont l\'un des principaux demandeurs de capitaux sur les marchés financiers. Elles utilisent les marchés pour lever des fonds afin de financer leur croissance, investir dans de nouveaux projets, développer l\'innovation ou refinancer leur dette existante.',
+ contentEn: 'Corporates are one of the main capital demanders in financial markets. They use financial markets to raise funds in order to finance growth, invest in new projects, develop innovation, or refinance existing debt.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Organes de décision clés',
+ titleEn: 'Key decision-making bodies',
+ points: [
+ 'Conseil d\'Administration : représente les actionnaires, approuve les décisions stratégiques majeures et les opérations de financement',
+ 'CEO (Directeur Général) : exécute la stratégie, gère les opérations quotidiennes, propose les orientations stratégiques',
+ 'CFO (Directeur Financier) : gère la structure financière, choisit entre financement par actions ou dette, interagit avec investisseurs et banques'
+ ],
+ pointsEn: [
+ 'Board of Directors: represents shareholders, approves major strategic decisions and financing operations',
+ 'CEO (Chief Executive Officer): executes strategy, manages daily operations, proposes strategic orientations',
+ 'CFO (Chief Financial Officer): manages financial structure, chooses between equity and debt financing, interacts with investors and banks'
+ ]
+ },
+ {
+ type: 'animation',
+ animationType: 'decision-flow',
+ title: 'Circuit de décision financière',
+ titleEn: 'Financial decision circuit',
+ description: 'Parcours d\'une décision de financement dans l\'entreprise',
+ descriptionEn: 'Journey of a financing decision within the company',
+ config: {
+ nodes: [
+ { id: 'board', label: 'Conseil d\'Administration', labelEn: 'Board of Directors', type: 'decision' },
+ { id: 'ceo', label: 'CEO', labelEn: 'CEO', type: 'execution' },
+ { id: 'cfo', label: 'CFO', labelEn: 'CFO', type: 'financial' },
+ { id: 'choice', label: 'Choix de financement', labelEn: 'Financing choice', type: 'fork' },
+ { id: 'equity', label: 'Actions (ECM)', labelEn: 'Equity (ECM)', type: 'option' },
+ { id: 'debt', label: 'Obligations (DCM)', labelEn: 'Debt (DCM)', type: 'option' }
+ ],
+ interactive: true,
+ toggleOptions: ['equity', 'debt']
+ }
+ },
+ {
+ type: 'comparison',
+ title: 'Financement par actions vs obligations',
+ titleEn: 'Equity vs Debt financing',
+ items: [
+ {
+ category: 'Actions (Equity)',
+ categoryEn: 'Equity (Shares)',
+ features: [
+ 'Les investisseurs deviennent propriétaires',
+ 'Dividendes non garantis',
+ 'Dilution de la propriété',
+ 'Risque élevé pour l\'investisseur',
+ 'Potentiel de gain illimité',
+ 'Pas d\'obligation de remboursement'
+ ],
+ featuresEn: [
+ 'Investors become owners',
+ 'Dividends not guaranteed',
+ 'Dilution of ownership',
+ 'Higher risk for investor',
+ 'Potentially unlimited upside',
+ 'No repayment obligation'
+ ]
+ },
+ {
+ category: 'Obligations (Debt)',
+ categoryEn: 'Debt (Bonds)',
+ features: [
+ 'Les investisseurs sont créanciers',
+ 'Intérêts garantis',
+ 'Pas de dilution',
+ 'Risque plus faible',
+ 'Gain limité',
+ 'Obligation de remboursement'
+ ],
+ featuresEn: [
+ 'Investors are creditors',
+ 'Interest payments guaranteed',
+ 'No dilution',
+ 'Lower risk',
+ 'Limited upside',
+ 'Repayment obligation'
+ ]
+ }
+ ]
+ },
+ {
+ type: 'quiz',
+ question: 'Quel est le rôle principal du CFO ?',
+ questionEn: 'What is the main role of the CFO?',
+ options: [
+ 'Gérer les opérations quotidiennes',
+ 'Représenter les actionnaires',
+ 'Gérer la structure financière et choisir les modes de financement',
+ 'Superviser la production'
+ ],
+ optionsEn: [
+ 'Manage daily operations',
+ 'Represent shareholders',
+ 'Manage financial structure and choose financing methods',
+ 'Supervise production'
+ ],
+ correctAnswer: 2,
+ explanation: 'Le CFO est responsable de la gestion financière de l\'entreprise, incluant le choix entre financement par actions ou dette, et l\'interaction avec les marchés financiers.',
+ explanationEn: 'The CFO is responsible for the company\'s financial management, including choosing between equity and debt financing, and interacting with financial markets.'
+ }
+ ]
+ },
+ {
+ id: 'investisseurs',
+ title: 'Les investisseurs : offreurs de capitaux',
+ titleEn: 'Investors: capital suppliers',
+ description: 'Qui sont les investisseurs et quels sont leurs objectifs',
+ descriptionEn: 'Who are investors and what are their objectives',
+ duration: '14 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les investisseurs sont les fournisseurs de capitaux sur les marchés financiers. Ils apportent de l\'argent aux demandeurs de capitaux (entreprises, États) en échange d\'un rendement attendu. Sans investisseurs, les marchés financiers ne peuvent pas fonctionner.',
+ contentEn: 'Investors are the capital suppliers in financial markets. They provide money to capital demanders (corporates, governments) in exchange for an expected return. Without investors, financial markets cannot function.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Les deux catégories d\'investisseurs',
+ titleEn: 'The two categories of investors',
+ points: [
+ 'Ménages (investisseurs individuels) : montants relativement petits, tolérance au risque hétérogène, expertise limitée, objectifs long terme',
+ 'Investisseurs institutionnels : fonds de pension, compagnies d\'assurance, fonds d\'investissement, fonds souverains - dominent les marchés en volume'
+ ],
+ pointsEn: [
+ 'Households (individual investors): relatively small amounts, heterogeneous risk tolerance, limited expertise, long-term objectives',
+ 'Institutional investors: pension funds, insurance companies, mutual funds, sovereign wealth funds - dominate markets by volume'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Les trois dimensions des objectifs d\'investissement',
+ titleEn: 'The three dimensions of investment objectives',
+ points: [
+ 'Rendement : compensation pour reporter la consommation et prendre du risque (dividendes, intérêts, plus-values)',
+ 'Risque : incertitude des rendements (risque de marché, de crédit, de liquidité, d\'inflation)',
+ 'Horizon d\'investissement : court terme = sensibilité à la volatilité / long terme = capacité à absorber les fluctuations'
+ ],
+ pointsEn: [
+ 'Return: compensation for postponing consumption and taking risk (dividends, interest, capital gains)',
+ 'Risk: uncertainty of returns (market risk, credit risk, liquidity risk, inflation risk)',
+ 'Investment horizon: short-term = sensitivity to volatility / long-term = ability to absorb fluctuations'
+ ]
+ },
+ {
+ type: 'example',
+ title: 'Exemple : Fonds de pension',
+ titleEn: 'Example: Pension funds',
+ content: 'Un fonds de pension collecte les cotisations pour payer les retraites futures. Horizon : très long terme (30-40 ans). Besoin : stabilité et flux prévisibles. Investissements typiques : obligations, actions diversifiées, actifs long terme. Objectif : préserver le capital et générer des rendements stables.',
+ contentEn: 'A pension fund collects contributions to pay future retirement benefits. Horizon: very long-term (30-40 years). Need: stability and predictable cash flows. Typical investments: bonds, diversified equity portfolios, long-term assets. Objective: preserve capital and generate stable returns.',
+ highlight: 'Principe fondamental : rendement attendu plus élevé = risque plus élevé',
+ highlightEn: 'Fundamental principle: higher expected returns = higher risk'
+ },
+ {
+ type: 'quiz',
+ question: 'Quelle est la principale différence entre investisseurs individuels et institutionnels ?',
+ questionEn: 'What is the main difference between individual and institutional investors?',
+ options: [
+ 'Les institutionnels ne prennent jamais de risques',
+ 'Les institutionnels gèrent de grandes quantités de capital et dominent les marchés',
+ 'Les individuels ont plus d\'expertise',
+ 'Il n\'y a pas de différence'
+ ],
+ optionsEn: [
+ 'Institutionals never take risks',
+ 'Institutionals manage large amounts of capital and dominate markets',
+ 'Individuals have more expertise',
+ 'There is no difference'
+ ],
+ correctAnswer: 1,
+ explanation: 'Les investisseurs institutionnels gèrent de très grandes quantités de capital et dominent les marchés en termes de volumes de transactions et d\'influence sur l\'allocation d\'actifs.',
+ explanationEn: 'Institutional investors manage very large amounts of capital and dominate markets in terms of trading volumes and influence on asset allocation.'
+ }
+ ]
+ },
+ {
+ id: 'asset-management',
+ title: 'L\'écosystème de la gestion d\'actifs',
+ titleEn: 'The asset management ecosystem',
+ description: 'Organisation et fonctionnement d\'une société de gestion',
+ descriptionEn: 'Organization and functioning of an asset management company',
+ duration: '16 min',
+ content: [
+ {
+ type: 'text',
+ content: 'La gestion d\'actifs joue un rôle central dans les marchés financiers. C\'est le mécanisme par lequel l\'épargne des investisseurs est transformée en investissements dans des actifs financiers. Les gestionnaires d\'actifs agissent comme décideurs professionnels pour le compte d\'investisseurs.',
+ contentEn: 'Asset management plays a central role in financial markets. It is the mechanism through which investors\' savings are transformed into investments in financial assets. Asset managers act as professional decision-makers on behalf of investors.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Principe fondamental',
+ titleEn: 'Core principle',
+ points: [
+ ' Séparation des fonctions : ceux qui prennent les décisions d\'investissement ne sont pas les mêmes que ceux qui contrôlent les risques et les opérations',
+ 'Protection des investisseurs : les actifs sont détenus par le dépositaire, pas par le gestionnaire',
+ 'Transparence et régulation stricte'
+ ],
+ pointsEn: [
+ ' Separation of functions: those who make investment decisions are not the same as those who control risk and operations',
+ 'Investor protection: assets are held by the custodian, not by the manager',
+ 'Transparency and strict regulation'
+ ]
+ },
+ {
+ type: 'animation',
+ animationType: 'value-chain',
+ title: 'Chaîne de valeur de la gestion d\'actifs',
+ titleEn: 'Asset management value chain',
+ description: 'Parcours animé d\'1€ investi à travers l\'organisation',
+ descriptionEn: 'Animated journey of €1 invested through the organization',
+ config: {
+ steps: [
+ { id: 'investor', label: 'Investisseur', labelEn: 'Investor', icon: '', amount: '1€' },
+ { id: 'sales', label: 'Commercial / Distribution', labelEn: 'Sales / Distribution', icon: '', role: 'Collecte de capital', roleEn: 'Capital collection' },
+ { id: 'fundManager', label: 'Gérant de fonds', labelEn: 'Fund Manager', icon: '', role: 'Décisions d\'investissement', roleEn: 'Investment decisions' },
+ { id: 'middleOffice', label: 'Middle Office', labelEn: 'Middle Office', icon: '', role: 'Contrôle des risques', roleEn: 'Risk control' },
+ { id: 'custodian', label: 'Dépositaire', labelEn: 'Custodian', icon: '', role: 'Conservation des actifs', roleEn: 'Asset safekeeping' }
+ ],
+ highlight: 'separation-of-functions'
+ }
+ },
+ {
+ type: 'keypoints',
+ title: 'Les rôles clés',
+ titleEn: 'Key roles',
+ points: [
+ 'Commercial : lève les capitaux, explique les stratégies, maintient les relations clients',
+ 'Gérant de fonds : analyse les marchés, sélectionne les actifs, construit les portefeuilles',
+ 'Middle Office : surveille les risques, vérifie la conformité, contrôle les limites',
+ 'Dépositaire : conserve les actifs, règle les transactions, calcule la valeur liquidative (VL)'
+ ],
+ pointsEn: [
+ 'Sales: raises capital, explains strategies, maintains client relationships',
+ 'Fund Manager: analyzes markets, selects assets, builds portfolios',
+ 'Middle Office: monitors risks, checks compliance, verifies limits',
+ 'Custodian: safekeeps assets, settles transactions, calculates Net Asset Value (NAV)'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'KYC & AML : Conformité réglementaire',
+ titleEn: 'KYC & AML: Regulatory compliance',
+ points: [
+ 'KYC (Know Your Customer) : identifier les clients, comprendre l\'origine des fonds, évaluer les profils de risque',
+ 'AML (Anti-Money Laundering) : prévenir le blanchiment d\'argent, lutter contre le financement du terrorisme',
+ 'Non-conformité = amendes lourdes, perte de licence, dommages réputationnels'
+ ],
+ pointsEn: [
+ 'KYC (Know Your Customer): identify clients, understand origin of funds, assess risk profiles',
+ 'AML (Anti-Money Laundering): prevent money laundering, fight terrorist financing',
+ 'Non-compliance = heavy fines, loss of license, reputational damage'
+ ]
+ },
+ {
+ type: 'quiz',
+ question: 'Pourquoi les actifs sont-ils détenus par le dépositaire et non par le gestionnaire ?',
+ questionEn: 'Why are assets held by the custodian and not by the manager?',
+ options: [
+ 'Pour réduire les coûts',
+ 'Pour protéger les investisseurs et réduire le risque de fraude',
+ 'C\'est une obligation fiscale',
+ 'Pour faciliter les transactions'
+ ],
+ optionsEn: [
+ 'To reduce costs',
+ 'To protect investors and reduce fraud risk',
+ 'It\'s a tax obligation',
+ 'To facilitate transactions'
+ ],
+ correctAnswer: 1,
+ explanation: 'La séparation entre gestion et conservation des actifs est fondamentale pour protéger les investisseurs. Le dépositaire indépendant réduit le risque de fraude et augmente la confiance.',
+ explanationEn: 'The separation between management and asset custody is fundamental to protect investors. The independent custodian reduces fraud risk and increases trust.'
+ }
+ ]
+ },
+ {
+ id: 'banques-intermediaires',
+ title: 'Banques et intermédiaires financiers',
+ titleEn: 'Banks and financial intermediaries',
+ description: 'Le rôle des banques dans l\'écosystème financier',
+ descriptionEn: 'The role of banks in the financial ecosystem',
+ duration: '14 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les banques et intermédiaires financiers jouent un rôle central dans les marchés financiers. Ils agissent comme connecteurs entre demandeurs de capitaux et offreurs de capitaux. Sans eux, l\'accès aux marchés serait limité, les transactions coûteuses et inefficaces.',
+ contentEn: 'Banks and financial intermediaries play a central role in financial markets. They act as connectors between capital demanders and capital suppliers. Without them, market access would be limited, transactions costly and inefficient.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Les trois métiers bancaires',
+ titleEn: 'The three banking businesses',
+ points: [
+ ' Banque de détail (Retail Banking) : particuliers et PME - dépôts, crédits, services de paiement',
+ 'Banque d\'investissement (Wholesale/Investment Banking) : grandes entreprises, institutionnels, États',
+ ' Gestion de patrimoine (Wealth Management) : clients fortunés - gestion de portefeuille, conseil'
+ ],
+ pointsEn: [
+ ' Retail Banking: individuals and SMEs - deposits, loans, payment services',
+ 'Wholesale/Investment Banking: large corporates, institutionals, governments',
+ ' Wealth Management: high-net-worth individuals - portfolio management, advice'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Activités de la banque d\'investissement',
+ titleEn: 'Investment banking activities',
+ points: [
+ 'ECM (Equity Capital Markets) : émission d\'actions, introductions en bourse (IPO)',
+ 'DCM (Debt Capital Markets) : émission d\'obligations, refinancement de dette',
+ 'M&A (Fusions & Acquisitions) : conseil en transactions, valorisation, négociation',
+ 'Trading & Market Making : fourniture de liquidité, cotation de prix'
+ ],
+ pointsEn: [
+ 'ECM (Equity Capital Markets): share issuance, initial public offerings (IPO)',
+ 'DCM (Debt Capital Markets): bond issuance, debt refinancing',
+ 'M&A (Mergers & Acquisitions): transaction advisory, valuation, negotiation',
+ 'Trading & Market Making: liquidity provision, price quoting'
+ ]
+ },
+ {
+ type: 'example',
+ title: 'Exemple : Introduction en bourse',
+ titleEn: 'Example: Initial Public Offering',
+ content: 'Une startup tech veut entrer en bourse pour lever 200M€. Elle mandate une banque d\'investissement qui : (1) valorise l\'entreprise, (2) structure l\'opération, (3) trouve des investisseurs institutionnels, (4) fixe le prix d\'introduction, (5) assure la liquidité après l\'IPO.',
+ contentEn: 'A tech startup wants to go public to raise €200M. It mandates an investment bank which: (1) values the company, (2) structures the operation, (3) finds institutional investors, (4) sets the IPO price, (5) ensures liquidity after the IPO.',
+ highlight: 'Les banques structurent, tarif ient et distribuent les titres aux investisseurs.',
+ highlightEn: 'Banks structure, price, and distribute securities to investors.'
+ },
+ {
+ type: 'quiz',
+ question: 'Quelle est la différence entre ECM et DCM ?',
+ questionEn: 'What is the difference between ECM and DCM?',
+ options: [
+ 'ECM gère les actions, DCM gère les obligations',
+ 'ECM gère les obligations, DCM gère les actions',
+ 'Il n\'y a pas de différence',
+ 'ECM est pour les particuliers, DCM pour les entreprises'
+ ],
+ optionsEn: [
+ 'ECM handles stocks, DCM handles bonds',
+ 'ECM handles bonds, DCM handles stocks',
+ 'There is no difference',
+ 'ECM is for individuals, DCM for companies'
+ ],
+ correctAnswer: 0,
+ explanation: 'ECM (Equity Capital Markets) s\'occupe de l\'émission d\'actions, tandis que DCM (Debt Capital Markets) s\'occupe de l\'émission d\'obligations. Ce sont deux métiers distincts au sein de la banque d\'investissement.',
+ explanationEn: 'ECM (Equity Capital Markets) handles share issuance, while DCM (Debt Capital Markets) handles bond issuance. They are two distinct businesses within investment banking.'
+ }
+ ]
+ },
+ {
+ id: 'banques-centrales-regulateurs',
+ title: 'Banques centrales et régulateurs',
+ titleEn: 'Central banks and financial regulators',
+ description: 'Le rôle structurel de la supervision et de la régulation',
+ descriptionEn: 'The structural role of supervision and regulation',
+ duration: '12 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les banques centrales et régulateurs financiers jouent un rôle structurel dans les marchés financiers. Ils ne cherchent pas le profit, mais visent à assurer la stabilité financière, la stabilité des prix et la confiance dans le système financier.',
+ contentEn: 'Central banks and financial regulators play a structural role in financial markets. They do not seek profit, but aim to ensure financial stability, price stability, and confidence in the financial system.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Les trois objectifs des banques centrales',
+ titleEn: 'The three objectives of central banks',
+ points: [
+ 'Stabilité des prix : contrôler l\'inflation, préserver le pouvoir d\'achat',
+ 'Stabilité financière : prévenir les crises systémiques, assurer la résilience du système bancaire',
+ 'Stabilité économique : lisser les cycles économiques, soutenir la croissance si nécessaire'
+ ],
+ pointsEn: [
+ 'Price stability: control inflation, preserve purchasing power',
+ 'Financial stability: prevent systemic crises, ensure banking system resilience',
+ 'Economic stability: smooth economic cycles, support growth when needed'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Outils de politique monétaire',
+ titleEn: 'Monetary policy tools',
+ points: [
+ 'Taux directeurs : influencent les taux de marché court terme, les coûts d\'emprunt, les décisions d\'investissement',
+ 'Provision de liquidité : injection ou retrait de liquidité via opérations de refinancement, programmes d\'achat d\'actifs',
+ 'Impact : affecte les prix des actifs, les rendements obligataires, la liquidité du marché'
+ ],
+ pointsEn: [
+ 'Key interest rates: influence short-term market rates, borrowing costs, investment decisions',
+ 'Liquidity provision: injection or withdrawal of liquidity through refinancing operations, asset purchase programs',
+ 'Impact: affects asset prices, bond yields, market liquidity'
+ ]
+ },
+ {
+ type: 'example',
+ title: 'Exemple : La BCE face à l\'inflation (2022-2023)',
+ titleEn: 'Example: The ECB facing inflation (2022-2023)',
+ content: 'En 2022, l\'inflation en Europe atteint 10%. La BCE remonte ses taux directeurs de 0% à 4% en quelques mois. Conséquence : emprunter devient plus cher, les investissements ralentissent, la demande baisse, l\'inflation redescend vers 2-3%. Mais la croissance économique ralentit aussi.',
+ contentEn: 'In 2022, inflation in Europe reaches 10%. The ECB raises its key rates from 0% to 4% in a few months. Consequence: borrowing becomes more expensive, investments slow down, demand decreases, inflation falls back to 2-3%. But economic growth also slows down.',
+ highlight: 'Les taux directeurs sont un outil puissant mais à double tranchant.',
+ highlightEn: 'Key interest rates are a powerful but double-edged tool.'
+ },
+ {
+ type: 'keypoints',
+ title: 'Rôle des régulateurs financiers',
+ titleEn: 'Role of financial regulators',
+ points: [
+ 'Superviser les acteurs financiers : banques, gestionnaires d\'actifs, intermédiaires',
+ 'Faire respecter les règles : transparence, protection des investisseurs, limites de risque',
+ 'Objectifs : réduire la fraude, limiter la prise de risque excessive, protéger les consommateurs'
+ ],
+ pointsEn: [
+ 'Supervise financial actors: banks, asset managers, intermediaries',
+ 'Enforce rules: transparency, investor protection, risk limits',
+ 'Objectives: reduce fraud, limit excessive risk-taking, protect consumers'
+ ]
+ },
+ {
+ type: 'quiz',
+ question: 'Que se passe-t-il quand la banque centrale augmente ses taux directeurs ?',
+ questionEn: 'What happens when the central bank raises its key interest rates?',
+ options: [
+ 'Emprunter devient moins cher, l\'économie accélère',
+ 'Emprunter devient plus cher, l\'économie ralentit',
+ 'Rien ne change',
+ 'Les actions montent automatiquement'
+ ],
+ optionsEn: [
+ 'Borrowing becomes cheaper, the economy accelerates',
+ 'Borrowing becomes more expensive, the economy slows down',
+ 'Nothing changes',
+ 'Stocks automatically rise'
+ ],
+ correctAnswer: 1,
+ explanation: 'Quand les taux augmentent, emprunter coûte plus cher. Les entreprises investissent moins, les ménages consomment moins. L\'économie ralentit, ce qui peut freiner l\'inflation.',
+ explanationEn: 'When rates increase, borrowing becomes more expensive. Companies invest less, households consume less. The economy slows down, which can curb inflation.'
+ }
+ ]
+ },
+ {
+ id: 'ecosysteme-global',
+ title: 'Comment tout se connecte : l\'écosystème financier',
+ titleEn: 'How everything connects: the financial ecosystem',
+ description: 'Vision d\'ensemble des interactions entre agents',
+ descriptionEn: 'Overview of interactions between agents',
+ duration: '10 min',
+ content: [
+ {
+ type: 'text',
+ content: 'Les marchés financiers ne doivent pas être vus comme une collection d\'agents isolés. Ils forment un écosystème cohérent, dans lequel chaque agent interagit avec les autres selon son rôle, ses objectifs et ses contraintes.',
+ contentEn: 'Financial markets should not be seen as a collection of isolated agents. They form a coherent ecosystem, in which each agent interacts with others according to its role, objectives, and constraints.'
+ },
+ {
+ type: 'animation',
+ animationType: 'capital-cycle',
+ title: 'Le cycle complet du capital',
+ titleEn: 'The complete capital cycle',
+ description: 'Animation montrant le parcours de l\'épargne vers l\'investissement et le retour sous forme de rendement',
+ descriptionEn: 'Animation showing the journey from savings to investment and return as yield',
+ config: {
+ steps: [
+ { id: 'household-saving', label: 'Épargne d\'un ménage', labelEn: 'Household savings', icon: '', amount: '10,000€' },
+ { id: 'asset-manager-collection', label: 'Collecte par gestionnaire d\'actifs', labelEn: 'Collection by asset manager', icon: '' },
+ { id: 'market-investment', label: 'Investissement sur les marchés', labelEn: 'Investment in markets', icon: '' },
+ { id: 'corporate-financing', label: 'Financement d\'une entreprise', labelEn: 'Corporate financing', icon: '' },
+ { id: 'project-execution', label: 'Réalisation du projet', labelEn: 'Project execution', icon: '' },
+ { id: 'return-generation', label: 'Génération de rendement', labelEn: 'Return generation', icon: '' },
+ { id: 'investor-return', label: 'Retour à l\'investisseur', labelEn: 'Return to investor', icon: '', amount: '10,500€' }
+ ],
+ cyclic: true
+ }
+ },
+ {
+ type: 'keypoints',
+ title: 'Interdépendances clés',
+ titleEn: 'Key interdependencies',
+ points: [
+ 'Les entreprises dépendent des investisseurs pour financer leur croissance',
+ 'Les investisseurs dépendent des marchés pour obtenir des rendements',
+ 'Les gestionnaires d\'actifs dépendent des banques et des infrastructures de marché',
+ 'Les banques dépendent de la liquidité et de la régulation',
+ 'Les banques centrales influencent tous les agents via la politique monétaire'
+ ],
+ pointsEn: [
+ 'Corporates rely on investors to finance growth',
+ 'Investors rely on markets to earn returns',
+ 'Asset managers rely on banks and market infrastructure',
+ 'Banks rely on liquidity and regulation',
+ 'Central banks influence all agents through monetary policy'
+ ]
+ },
+ {
+ type: 'text',
+ content: 'Les marchés financiers servent de mécanisme de coordination : les prix agrègent l\'information, les rendements reflètent le risque, la liquidité permet la flexibilité, et la régulation assure la confiance. À travers cette coordination, les marchés allouent le capital aux usages productifs, disciplinent les agents économiques et redistribuent le risque entre les participants.',
+ contentEn: 'Financial markets serve as a coordination mechanism: prices aggregate information, yields reflect risk, liquidity enables flexibility, and regulation ensures trust. Through this coordination, markets allocate capital to productive uses, discipline economic agents, and redistribute risk across participants.'
+ },
+ {
+ type: 'quiz',
+ question: 'Pourquoi dit-on que les marchés financiers forment un "écosystème" ?',
+ questionEn: 'Why do we say financial markets form an "ecosystem"?',
+ options: [
+ 'Parce qu\'ils sont naturels',
+ 'Parce que chaque agent dépend des autres et interagit avec eux',
+ 'Parce qu\'ils sont verts',
+ 'Parce qu\'ils sont complexes'
+ ],
+ optionsEn: [
+ 'Because they are natural',
+ 'Because each agent depends on others and interacts with them',
+ 'Because they are green',
+ 'Because they are complex'
+ ],
+ correctAnswer: 1,
+ explanation: 'Un écosystème implique des interdépendances : aucun agent ne peut fonctionner efficacement de manière isolée. Les entreprises ont besoin d\'investisseurs, les investisseurs ont besoin de marchés, les marchés ont besoin de régulation, etc.',
+ explanationEn: 'An ecosystem implies interdependencies: no agent can function efficiently in isolation. Companies need investors, investors need markets, markets need regulation, etc.'
+ }
+ ]
+ },
+ {
+ id: 'vocabulaire-cle',
+ title: 'Vocabulaire clé et définitions',
+ titleEn: 'Key vocabulary and definitions',
+ description: 'Termes essentiels à maîtriser pour les examens',
+ descriptionEn: 'Essential terms to master for exams',
+ duration: '8 min',
+ content: [
+ {
+ type: 'keypoints',
+ title: 'Concepts fondamentaux',
+ titleEn: 'Core concepts',
+ points: [
+ 'Agent économique : individu ou institution participant à l\'activité économique et financière',
+ 'Marché financier : lieu où les instruments financiers sont émis et échangés',
+ 'Demandeur de capitaux : agent qui a besoin de financement (entreprises, États)',
+ 'Offreur de capitaux : agent qui fournit du capital en échange de rendements (investisseurs)'
+ ],
+ pointsEn: [
+ 'Economic agent: individual or institution participating in economic and financial activity',
+ 'Financial market: place where financial instruments are issued and traded',
+ 'Capital demander: agent that needs financing (corporates, governments)',
+ 'Capital supplier: agent that provides capital in exchange for returns (investors)'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Agents corporates',
+ titleEn: 'Corporate agents',
+ points: [
+ 'Conseil d\'Administration : organe approuvant les décisions stratégiques et financières majeures',
+ 'CEO : directeur général en charge de la stratégie et des opérations',
+ 'CFO : directeur financier responsable du financement et de la structure financière',
+ 'Financement par actions : lever des capitaux en émettant des actions',
+ 'Financement par dette : lever des capitaux en émettant des obligations'
+ ],
+ pointsEn: [
+ 'Board of Directors: body approving major strategic and financial decisions',
+ 'CEO: chief executive officer in charge of strategy and operations',
+ 'CFO: chief financial officer responsible for financing and financial structure',
+ 'Equity financing: raising capital by issuing shares',
+ 'Debt financing: raising capital by issuing bonds'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Investisseurs et gestion d\'actifs',
+ titleEn: 'Investors and asset management',
+ points: [
+ 'Investisseur institutionnel : investisseur professionnel gérant de grandes quantités de capital',
+ 'Horizon d\'investissement : période pendant laquelle un investisseur peut garder son argent investi',
+ 'Gérant de fonds : individu prenant les décisions d\'investissement',
+ 'Middle Office : fonction de contrôle des risques et de conformité',
+ 'Dépositaire : institution indépendante détenant et protégeant les actifs',
+ 'VL (Valeur Liquidative) : valeur des actifs d\'un fonds moins les passifs'
+ ],
+ pointsEn: [
+ 'Institutional investor: professional investor managing large pools of capital',
+ 'Investment horizon: period over which an investor can keep money invested',
+ 'Fund manager: individual making investment decisions',
+ 'Middle Office: risk control and compliance function',
+ 'Custodian: independent institution holding and safeguarding assets',
+ 'NAV (Net Asset Value): value of a fund\'s assets minus liabilities'
+ ]
+ },
+ {
+ type: 'keypoints',
+ title: 'Banques et régulation',
+ titleEn: 'Banks and regulation',
+ points: [
+ 'Banque de détail : services bancaires pour particuliers et PME',
+ 'Banque d\'investissement : services bancaires pour grandes entreprises et institutions',
+ 'ECM : activités d\'émission d\'actions',
+ 'DCM : activités d\'émission d\'obligations',
+ 'M&A : services de conseil en transactions d\'entreprise',
+ 'Market Making : activité fournissant de la liquidité en cotant des prix',
+ 'Banque centrale : autorité monétaire responsable de la stabilité des prix et financière',
+ 'Politique monétaire : actions de la banque centrale pour influencer les conditions économiques',
+ 'KYC : règles pour identifier et comprendre les clients',
+ 'AML : règles pour prévenir les activités financières illégales'
+ ],
+ pointsEn: [
+ 'Retail banking: banking services for individuals and SMEs',
+ 'Investment banking: banking services for large corporates and institutions',
+ 'ECM: share issuance activities',
+ 'DCM: bond issuance activities',
+ 'M&A: advisory services for corporate transactions',
+ 'Market making: activity providing liquidity by quoting prices',
+ 'Central bank: monetary authority responsible for price and financial stability',
+ 'Monetary policy: central bank actions to influence economic conditions',
+ 'KYC: rules to identify and understand clients',
+ 'AML: rules to prevent illegal financial activities'
+ ]
+ },
+ {
+ type: 'text',
+ content: 'Ce chapitre établit une compréhension complète et cohérente des agents opérant sur les marchés financiers. Il montre que la finance n\'est pas seulement une question de produits ou de prix, mais de personnes et d\'institutions interagissant au sein d\'un système régulé. Comprendre les agents économiques est donc la pierre angulaire de l\'analyse des marchés financiers.',
+ contentEn: 'This chapter establishes a complete and coherent understanding of the agents operating in financial markets. It shows that finance is not merely about products or prices, but about people and institutions interacting within a regulated system. Understanding economic agents is therefore the cornerstone of financial market analysis.'
+ }
+ ]
+ }
+]

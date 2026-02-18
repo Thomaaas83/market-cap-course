@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GraduationCap, Home, Languages } from 'lucide-react'
+import { GraduationCap, Home, Languages, BookOpen, Brain, Layers } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 
 interface LayoutProps {
@@ -9,13 +9,19 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
-  const isHome = location.pathname === '/'
   const { language, setLanguage, t } = useLanguage()
+
+  const navItems = [
+    { path: '/', icon: Home, label: t('Accueil', 'Home') },
+    { path: '/quiz', icon: Brain, label: t('Quiz', 'Quiz') },
+    { path: '/flashcards', icon: Layers, label: t('Flashcards', 'Flashcards') },
+    { path: '/glossary', icon: BookOpen, label: t('Glossaire', 'Glossary') }
+  ]
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header moderne */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+      <header className="bg-white/40 backdrop-blur-2xl border-b border-white/60 sticky top-0 z-50 shadow-lg glass-optimized">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo et titre */}
@@ -32,21 +38,29 @@ export default function Layout({ children }: LayoutProps) {
             </Link>
 
             {/* Navigation */}
-            <nav className="flex items-center gap-2">
-              <Link
-                to="/"
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                  isHome
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-              >
-                <Home className="h-4 w-4" />
-                <span className="hidden sm:inline">{t('Accueil', 'Home')}</span>
-              </Link>
+            <nav className="flex items-center gap-1">
+              {navItems.map(item => {
+                const Icon = item.icon
+                const isActive = location.pathname === item.path
+                
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all ${
+                      isActive
+                        ? 'bg-blue-100 text-blue-700'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    }`}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span className="hidden lg:inline text-sm">{item.label}</span>
+                  </Link>
+                )
+              })}
               
               {/* Sélecteur de langue */}
-              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 ml-2">
                 <button
                   onClick={() => setLanguage('fr')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-sm transition-all ${
@@ -81,7 +95,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-auto">
+      <footer className="bg-white/40 backdrop-blur-2xl border-t border-white/60 mt-auto shadow-lg glass-optimized">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-gray-600">

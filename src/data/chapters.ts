@@ -3,7 +3,8 @@ import { introductionLessons } from './chapters/introduction'
 import { obligationsLessons } from './chapters/obligations'
 import { optionsLessons } from './chapters/options'
 import { indicesEtfLessons } from './chapters/indices-etf'
-import { BookOpen, FileText, TrendingUp, Percent, Shield, Repeat } from 'lucide-react'
+import { economicAgentsLessons } from './chapters/economic-agents'
+import { BookOpen, FileText, TrendingUp, Shield } from 'lucide-react'
 
 export const chapters: Chapter[] = [
   // Chapitre 1 : Organisation du Marché des Capitaux (6 leçons)
@@ -34,45 +35,25 @@ export const chapters: Chapter[] = [
     ]
   },
   
-  // Chapitres suivants (vides pour l'instant)
+  // Chapitre 3 : Les Agents Économiques (8 leçons)
   {
-    id: 'actions',
-    title: 'Les Actions',
-    titleEn: 'Stocks',
-    description: 'Titres de propriété, dividendes et valorisation',
-    descriptionEn: 'Ownership securities, dividends and valuation',
+    id: 'agents',
+    title: 'Les Agents Économiques du Marché des Capitaux',
+    titleEn: 'Economic Agents of Capital Market',
+    description: 'Comprendre les différents acteurs : investisseurs, émetteurs, intermédiaires',
+    descriptionEn: 'Understanding the different actors: investors, issuers, intermediaries',
     icon: TrendingUp,
-    color: 'bg-red-100',
-    lessons: []
+    color: 'bg-green-100',
+    lessons: economicAgentsLessons
   },
   {
-    id: 'taux',
-    title: 'Les Taux d\'Intérêt',
-    titleEn: 'Interest Rates',
-    description: 'Comprendre les taux, leur impact et leur évolution',
-    descriptionEn: 'Understanding rates, their impact and evolution',
-    icon: Percent,
-    color: 'bg-yellow-100',
-    lessons: []
-  },
-  {
-    id: 'risques',
-    title: 'Gestion des Risques',
-    titleEn: 'Risk Management',
-    description: 'Identifier, mesurer et gérer les différents types de risques',
-    descriptionEn: 'Identifying, measuring and managing different types of risks',
+    id: 'environnement',
+    title: 'Environnement et Enjeux : Empreinte Carbone',
+    titleEn: 'Environment and Issues: Carbon Footprint',
+    description: 'Finance durable, mesure de l\'empreinte carbone et enjeux environnementaux',
+    descriptionEn: 'Sustainable finance, carbon footprint measurement and environmental issues',
     icon: Shield,
-    color: 'bg-orange-100',
-    lessons: []
-  },
-  {
-    id: 'derives',
-    title: 'Produits Dérivés Avancés',
-    titleEn: 'Advanced Derivatives',
-    description: 'Futures, swaps et autres instruments complexes',
-    descriptionEn: 'Futures, swaps and other complex instruments',
-    icon: Repeat,
-    color: 'bg-indigo-100',
+    color: 'bg-emerald-100',
     lessons: []
   }
 ]

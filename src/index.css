@@ -26,9 +26,38 @@
 }
 
 @layer utilities {
+  /* Optimisations de performance pour backdrop-blur */
+  .backdrop-blur-2xl,
+  .backdrop-blur-xl,
+  .backdrop-blur-lg {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Optimisation pour les éléments avec glassmorphism */
+  .glass-optimized {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Isolation pour éviter les repaints */
+    isolation: isolate;
+    contain: layout style paint;
+  }
+  
+  /* Optimisation pour les animations */
+  .animate-optimized {
+    will-change: transform, opacity;
+  }
+  
+  /* Désactiver will-change après animation */
+  .animate-optimized:not(:hover):not(:focus) {
+    will-change: auto;
+  }
+
   /* Animations personnalisées */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-in;
+    animation: fadeIn 0.5s ease-in;
   }
 
   @keyframes fadeIn {
@@ -39,6 +68,39 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* Animation de rebond */
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+
+  /* Perspective pour effet 3D */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Effet de pulsation */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Gradient animé */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 

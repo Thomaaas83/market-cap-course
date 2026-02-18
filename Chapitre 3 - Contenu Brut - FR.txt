@@ -1,0 +1,16 @@
+================================================================================
+CHAPITRE 3 - CONTENU BRUT (VERSION FRANÇAISE)
+================================================================================
+
+Instructions:
+-------------
+Colle ici le contenu complet de ton 3ème cours en français.
+Ce fichier servira de base pour créer la version structurée du chapitre.
+
+
+CONTENU DU COURS:
+-----------------
+[Colle ton contenu ici]
+
+
+================================================================================
